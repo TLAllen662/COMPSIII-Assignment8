@@ -1,6 +1,6 @@
-# Assignment #7 - `GET` and `POST` Requests
+# Assignment #7 - HTTP Requests
 
-**TASK**: Create a `JSONPlaceholder` class that implements `GET` and `POST` requests using the `requests` module. The class has the following class diagram
+**TASK**: Create a `JSONPlaceholder` class that implements `GET`, `POST`, `PUT`, and `DELETE` requests using the `requests` module. The class has the following class diagram
 
 ![Assignment Class Diagram](./ClassDiagram.png)
 
@@ -9,9 +9,7 @@ The class is initialized with a `base_url` property that will be the endpoint wh
 The class should have the following methods:
 - `get_request()`: Sends a `GET` request to the `base_url`. Returns a dictionary with the (1) status code, (2) headers, and (3) first 500 characters in the response body.
 - `get_request_by_userid(user_id)`: Sends a `GET` request to the `base_url` modified with the `user_id` added as a query parameter (e.g. if the user_id is 3 then the endpoint should be: `https://jsonplaceholder.typicode.com/posts?userId=3)`. Returns a dictionary with the (1) status code, (2) headers, and (3) first 500 characters in the response body.
-- `post_request(data)`: Takes a dictionary of data and sends a `POST` request with the data to the base_url. It then returns a dictionary with the (1) status code, (2) headers, and (3) first 500 characters in the response body.
-
-The format of the dictionary being returned is shown below:
+- `post_request(data)`: Takes a dictionary of data and sends a `POST` request with the data to the base_url. It then returns a dictionary with the (1) status code, (2) headers, and (3) first 500 characters in the response body. The format of the dictionary being returned is shown below:
 ```python
 example_dictionary = { 
     "status_code": "STATUS_CODE_HERE", 
@@ -19,6 +17,15 @@ example_dictionary = {
     "content": "CONTENT_HERE" 
 }
 ```
+- `update_user(userId, title, body)`: Accepts a `userID`, `title`, and `body` as arguments. The method should then:
+        - Create a dictionary that contains the `title` and `body`.  
+        - Format the `base_url` to point to the specified `userId` endpoint (e.g. If the `userId` is 5 then then url would be `base_url/5`). 
+        - Send a `PUT` request to the modified base_url with the dictionary data you created.
+        - Return a dictionary with the (1) status code, (2) headers, and (3) first 500 characters in the response body.
+- `delete_user(user_id)`: Accepts a `userID` as an argument. The method should then:
+    - Format the `base_url` to point to the specified `userId` endpoint (e.g. If the userId is 5 then then url would be `base_url/5`). 
+    - Send a `DELETE` request to the modified `base_url`.
+    - Return a dictionary with the status code.
 
 ## Grading Your Work
 This assignment can grade itself! To setup the autograding, you should do the following:
@@ -50,3 +57,11 @@ Below is a summary of what each unit test for this assignment is checking for.
 ### `POST` Requests Tests
 - `test_post_request_success`: Test if post_request method returns correct data structure.
 - `test_post_request_correct_parameters`: Test if post_request method calls requests.post with correct parameters.
+
+### `UPDATE` Requests Tests
+- `test_update_user_success`: Tests successful `PUT` request to update a user using `update_user`.
+- `test_update_user_correct_url_and_data`: Tests if `update_user` makes PUT request with correct URL and data.
+
+### `DELETE` Requests Tests
+- `test_delete_user_success`: Test successful `DELETE` request using `delete_user` method.
+- `test_delete_user_correct_url`: Test if `delete_user` makes `DELETE` request with correct URL.
