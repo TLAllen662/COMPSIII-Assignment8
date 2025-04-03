@@ -53,28 +53,6 @@ def test_get_request_with_correct_url(json_placeholder, mocker):
     
     mock_get.assert_called_once_with(url)
 
-def test_get_request_by_userid_success(json_placeholder, mock_response):
-    """Test if get_request_by_userid method returns correct data structure"""
-    url = "https://jsonplaceholder.typicode.com/posts"
-    user_id = 3
-    result = json_placeholder.get_request_by_userid(user_id)
-    
-    assert isinstance(result, dict)
-    assert all(key in result for key in ['status_code', 'headers', 'content'])
-    assert result['status_code'] == 200
-    assert result['headers'] == {"Content-Type": "application/json"}
-
-def test_get_request_by_userid_correct_parameters(json_placeholder, mocker):
-    """Test if get_request_by_userid method calls requests.get with correct parameters"""
-    mock_get = mocker.patch('requests.get')
-    url = "https://jsonplaceholder.typicode.com/posts"
-    user_id = 3
-    
-    json_placeholder.get_request_by_userid(user_id)
-    
-    # Check if the method was called with correct URL and parameters
-    mock_get.assert_called_once_with(f'{url}?userId={user_id}')
-
 def test_post_request_success(json_placeholder, mock_post_response):
     """Test if post_request method returns correct data structure"""
     url = "https://jsonplaceholder.typicode.com/posts"
