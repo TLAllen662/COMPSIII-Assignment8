@@ -1,4 +1,4 @@
-# Assignment #7 - HTTP Requests
+# Assignment #8 - HTTP Requests
 
 **TASK**: Create a `JSONPlaceholder` class that implements `GET`, `POST`, `PUT`, and `DELETE` requests using the `requests` module. The class has the following class diagram
 
