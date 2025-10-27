@@ -29,10 +29,18 @@ class JSONPlaceholder:
             "headers": response.headers,
             "content": response.content
         }
-    data = {
-        "title" = "TITLE_DATA"
-        "body" = "BODY_DATA"
-    }
+    def update_user(userId, title, body):
+        data = {
+            "userId": userId,
+            "title": title,
+            "body": body
+        response = requests.put(f"{self.base_url}/posts/{userId}", json=data)
+        return {
+            "status_code": response.status_code,
+            "headers": response.headers,
+            "content": response.content
+        }
+        }
 #create delete_request
     def delete_request(self):
         response = requests.delete(self.base_url)
